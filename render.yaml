@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: autojoin-welcome-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    healthCheckPath: /
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: DB_PATH
+        value: /var/data/bot.db
+      - key: BACKUP_DIR
+        value: /var/data/backups
+      - key: USE_WEBHOOK
+        value: "true"
+    # Attach a persistent disk mounted at /var/data if your Render plan supports it.
+    # Render persistent disks may require a paid plan.
